@@ -24,12 +24,15 @@ import java.util.logging.Logger;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-
-@ComponentScan(value = "web")
+@ComponentScan("web")
 public class PersistenceJPAConfig {
 
+
+    private final Environment env;
     @Autowired
-    private Environment env;
+    public PersistenceJPAConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource getDataSource() {

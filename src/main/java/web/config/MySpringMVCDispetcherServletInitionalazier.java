@@ -1,8 +1,10 @@
 package web.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,15 +17,15 @@ public class MySpringMVCDispetcherServletInitionalazier extends AbstractAnnotati
 
 
     //Переопределяем метод, чтобы перекодировать текст пришедший из браузера
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-
-        FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
-        encodingFilter.setInitParameter("encoding", "UTF-8");
-        encodingFilter.setInitParameter("forceEncoding", "true");
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
-    }
+//    @Override
+//    public void onStartup(ServletContext servletContext) throws ServletException {
+//        super.onStartup(servletContext);
+//
+//        FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
+//        encodingFilter.setInitParameter("encoding", "UTF-8");
+//        encodingFilter.setInitParameter("forceEncoding", "true");
+//        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+//    }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
@@ -38,15 +40,26 @@ public class MySpringMVCDispetcherServletInitionalazier extends AbstractAnnotati
 
 
 
-/*    @Override
+//    @Override
+//    protected Filter[] getServletFilters() {
+//
+//        CharacterEncodingFilter cef=new CharacterEncodingFilter();
+//
+//        cef.setEncoding("UTF-8");
+//        cef.setForceEncoding(true);
+//        return new Filter[]{new HiddenHttpMethodFilter() ,cef};
+//    }
+
+//    работает
+    @Override
     protected Filter[] getServletFilters() {
 
         CharacterEncodingFilter cef=new CharacterEncodingFilter();
 
         cef.setEncoding("UTF-8");
         cef.setForceEncoding(true);
-        return new Filter[]{new HiddenHttpMethodFilter() ,cef};
-    }*/
+        return new Filter[]{cef};
+    }
 
 
 }

@@ -18,13 +18,13 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-
-    UserService userService;
-
     @Autowired
-    public void setSingerService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+
+
+//    public void setSingerService(UserService userService) {
+//        this.userService = userService;
+//    }
 
 
 
